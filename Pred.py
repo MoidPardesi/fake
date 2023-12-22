@@ -3,12 +3,12 @@ import pickle
 import streamlit as st
 
 # loading the saved model
-loaded_model = pickle.load(open('trained_model.sav', 'rb'))
+loaded_model = pickle.load(open('logistic_regression_model.sav', 'rb'))
 
 
 # creating a function for Prediction
 
-def diabetes_prediction(input_data):
+def news_prediction(input_data):
     
 
     # changing the input_data to numpy array
@@ -21,11 +21,9 @@ def diabetes_prediction(input_data):
     print(prediction)
 
     if prediction[0] == 0:
-        return 'The person is not diabetic'
-    elif prediction[0] == 1:
-        return 'The person is prediabetic'
+        return 'This news is fake'
     else:
-        return 'The person is diabetic'
+        return 'This news is real'
   
     
   
@@ -33,48 +31,31 @@ def main():
     
     
     # giving a title
-    st.title('Diabetes Prediction Web App')
+    st.title('Fake News Prediction Web App')
     
     
     # getting the input data from the user
     
     
-    HighBP = st.selectbox('High Bp', [0, 1])
-    HighChol = st.selectbox('HighChol', [0, 1])
-    CholCheck = st.selectbox('CholCheck', [0, 1])
-    BMI = st.text_input('BMI')
-    Smoker = st.selectbox('Smoker', [0, 1])
-    Stroke = st.selectbox('Stroke', [0, 1])
-    HeartDiseaseorAttack = st.selectbox('HeartDiseaseorAttack', [0, 1])
-    PhysActivity = st.selectbox('PhysActivity', [0, 1])
-    Fruits = st.selectbox('Fruits', [0, 1])
-    Veggies = st.selectbox('Veggies', [0, 1])
-    HvyAlcoholConsump = st.selectbox('HvyAlcoholConsump', [0, 1])
-    AnyHealthcare = st.selectbox('AnyHealthcare', [0, 1])
-    NoDocbcCost = st.selectbox('NoDocbcCost', [0, 1])
-    DiffWalk = st.selectbox('DiffWalk', [0, 1])
-    Sex = st.selectbox('Sex', [0, 1])
-    GenHlth = st.selectbox('GenHlth', [0, 1,2,3,4,5])
-    Income = st.selectbox('Income', [0, 1,2,3,4,5,6,7,8])
-    Education = st.selectbox('Education', [0, 1,2,3,4,5,6])
-    MentHlth = st.selectbox('MentHlth', list(range(31)))
-    PhysHlth = st.selectbox('PhysHlth', list(range(31)))
+    id = st.text_input('id')
+    headline = st.text_input('headline')
+    written_by = st.text_input('written_by')
+    news = st.text_input('news')
+   
     
     
     
     
     # code for Prediction
-    diagnosis = ''
+    predict = ''
     
     # creating a button for Prediction
     
-    if st.button('Diabetes Test Result'):
-        diagnosis = diabetes_prediction([HighBP, HighChol, CholCheck, BMI, Smoker, Stroke, HeartDiseaseorAttack, PhysActivity,
-                                          Fruits, Veggies ,HvyAlcoholConsump,AnyHealthcare,NoDocbcCost,DiffWalk,Sex,GenHlth,Income
-                                          ,Education,MentHlth, PhysHlth])
+    if st.button('News Prediction Result'):
+        predict = news_prediction([id,headline,written_by,news])
         
         
-    st.success(diagnosis)
+    st.success(predict)
     
     
     
