@@ -27,7 +27,7 @@ def main():
     st.title('Fake News Prediction Web App')
 
     # getting the input data from the user
-    id = st.text_input('id')
+   
     headline = st.text_input('headline')
     written_by = st.text_input('written_by')
     news = st.text_input('news')
@@ -37,7 +37,7 @@ def main():
 
     # creating a button for Prediction
     if st.button('News Prediction Result'):
-        predict = news_prediction([id, headline, written_by, news])
+        predict = news_prediction([headline, written_by, news])
 
     st.success(predict)
 
