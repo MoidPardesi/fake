@@ -28,17 +28,19 @@ def main():
 
     # getting the input data from the user
    
-    headline = st.text_input('Headline')
-    written_by = st.text_input('Written by')
-    news = st.text_input('News article text')
+    headline = st.text_input('headline')
+    written_by = st.text_input('written_by')
+    news = st.text_input('news')
 
     # code for Prediction
-    prediction_message = ''
+    predict = ''
 
     # creating a button for Prediction
     if st.button('News Prediction Result'):
-        prediction_message = news_prediction(headline, written_by, news)
-        st.success(prediction_message)
+        predict = news_prediction([headline, written_by, news])
+
+    st.success(predict)
+
 
 if __name__ == '__main__':
     main()
