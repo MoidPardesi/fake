@@ -17,7 +17,7 @@ def news_prediction(headline, written_by, news):
     # Make a prediction
     prediction = loaded_model.predict(transformed_input)
     
-    if prediction[1] == 1:
+    if prediction[0] == 1:
         return 'This news is real'
     else:
         return 'This news is fake'
