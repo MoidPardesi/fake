@@ -3,7 +3,7 @@ import joblib
 import streamlit as st
 
 # loading the saved model
-loaded_model = joblib.load(open('logistic_regression_model.sav', 'rb'))
+loaded_model = joblib.load('logistic_regression_model.sav')
 loaded_vectorizer = joblib.load('count_vectorizer.sav')
 
 # creating a function for Prediction
@@ -25,22 +25,20 @@ def news_prediction(headline, written_by, news):
 def main():
     # giving a title
     st.title('Fake News Prediction Web App')
-
+    
     # getting the input data from the user
-   
-    headline = st.text_input('headline')
-    written_by = st.text_input('written_by')
-    news = st.text_input('news')
+    headline = st.text_input('Headline')
+    written_by = st.text_input('Written by')
+    news = st.text_area('News article text')  # Changed to text_area for longer input
 
     # code for Prediction
-    predict = ''
+    prediction_message = ''
 
     # creating a button for Prediction
     if st.button('News Prediction Result'):
-        predict = news_prediction([headline, written_by, news])
+        prediction_message = news_prediction(headline, written_by, news)
 
-    st.success(predict)
-
+    st.success(prediction_message)
 
 if __name__ == '__main__':
     main()
