@@ -1,9 +1,9 @@
 import numpy as np
-import pickle
+import joblib
 import streamlit as st
 
 # loading the saved model
-loaded_model = pickle.load(open('logistic_regression_model.sav', 'rb'))
+loaded_model = joblib.load(open('logistic_regression_model.sav', 'rb'))
 
 # creating a function for Prediction
 def news_prediction(input_data):
