@@ -4,19 +4,19 @@ import streamlit as st
 
 # loading the saved model
 loaded_model = joblib.load(open('logistic_regression_model.sav', 'rb'))
+loaded_vectorizer = joblib.load('count_vectorizer.sav')
 
 # creating a function for Prediction
-def news_prediction(input_data):
-    # changing the input_data to numpy array
-    input_data_as_numpy_array = np.asarray(input_data)
-
-    # reshape the array as we are predicting for one instance
-    input_data_reshaped = input_data_as_numpy_array.reshape(1, -1)
-
-    # Ensure loaded_model is a model with a predict method
-    prediction = loaded_model.predict(input_data_reshaped)
-    print(prediction)
-
+def news_prediction(headline, written_by, news):
+    # Combine the features into a single string
+    combined_features = f"{headline} {written_by} {news}"
+    
+    # Transform the input data using the loaded vectorizer
+    transformed_input = loaded_vectorizer.transform([combined_features])
+    
+    # Make a prediction
+    prediction = loaded_model.predict(transformed_input)
+    
     if prediction[0] == 0:
         return 'This news is fake'
     else:
